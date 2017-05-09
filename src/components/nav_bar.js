@@ -21,13 +21,13 @@ export default class NavBar extends Component {
 
     <ul className="navbar-nav mr-right">
       <li className="nav-item active">
-        <Link to='/'>Home</Link>
+        <Link to='/'>HOME</Link>
       </li>
       <li className="nav-item">
-        <Link to='/contact'>Contact</Link>
+        <Link to='/contact'>CONTACT</Link>
       </li>
       <li className="nav-item">
-        <Link to='/login'>Log In</Link>
+        <Link to='/login'>LOG IN</Link>
       </li>
     </ul>
   </nav>
