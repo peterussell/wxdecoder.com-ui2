@@ -18,13 +18,15 @@ const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
-      <div>
-        <NavBar />
-        <Switch>
-          <Route path="/contact" component={Contact} />
-          <Route path="/login" component={Login} />
-          <Route path="/" component={MetarDecoder} />
-        </Switch>
+      <div className="wxd-main-container">
+        <div className="wxd-body-container">
+          <NavBar />
+          <Switch>
+            <Route path="/contact" component={Contact} />
+            <Route path="/login" component={Login} />
+            <Route path="/" component={MetarDecoder} />
+          </Switch>
+        </div>
         <PageFooter />
       </div>
     </BrowserRouter>
