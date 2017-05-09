@@ -16,7 +16,7 @@ export default class NavBar extends Component {
       <span className="navbar-toggler-icon"></span>
     </button>
     <a className="navbar-brand mr-auto" href="#">
-      <img src={'./assets/img/wxd-logo-sm.png'} />
+      <img src={require(`../../assets/img/wxd-logo-sm.png`)} />
     </a>
 
     <ul className="navbar-nav mr-right">

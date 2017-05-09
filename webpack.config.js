@@ -16,8 +16,8 @@ module.exports = {
       }
     },
     {
-      test: /\.(png|jpg)$/,
-      loader: 'url?limit=25000'
+      test: /\.(png|jpg|svg)$/,
+      loader: 'url-loader?limit=8192',
     }]
   },
   resolve: {
