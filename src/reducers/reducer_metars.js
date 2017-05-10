@@ -1,14 +1,17 @@
 import { FETCH_METAR } from '../actions';
 
-export default function(state = null, action) {
+export default function(state = [], action) {
   switch(action.type) {
     case FETCH_METAR:
       const decoded = action.payload.data.decoded_metar;
-      return {
+      const newMetar = {
+        key: decoded.icao_id.decoded,
         icao_id: decoded.icao_id.decoded,
         raw_metar: decoded.raw_metar,
         decoded_metar: decoded
-      };
+      }
+      return [...state, newMetar];
+
     default:
       return state;
   }

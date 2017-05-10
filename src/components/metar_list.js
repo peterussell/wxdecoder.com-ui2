@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Collapsible from 'react-collapsible';
 
 class MetarList extends Component {
   renderMetarDetails(metar) {
@@ -29,31 +30,44 @@ class MetarList extends Component {
     )
   }
 
+  renderMetar(metar) {
+    const dc = metar.decoded_metar;
+    return (
+      <Collapsible trigger={metar.raw_metar}>
+      <table>
+        <tbody>
+          <tr><td width={200}>Airport ID</td><td>{metar.icao_id}</td></tr>
+          <tr>
+            <td>Date & Time</td>
+            <td>
+              {dc.obs_datetime.decoded.date} day of the month at
+              {dc.obs_datetime.decoded.time} Zulu
+            </td>
+          </tr>
+          <tr><td>Automated</td><td>{dc.mod_auto.decoded}</td></tr>
+          <tr><td>Wind Dir. & Speed</td><td>{dc.wind_dir_speed.decoded}</td></tr>
+          <tr><td>Visibility</td><td>{dc.vis.decoded}</td></tr>
+          <tr><td>Sky Condition</td><td>{dc.sky_condition.decoded}</td></tr>
+          <tr><td>Temperature</td><td>{dc.temp.decoded}</td></tr>
+          <tr><td>Dewpoint</td><td>{dc.dewpoint.decoded}</td></tr>
+          <tr><td>Altimeter</td><td>{dc.altimeter.decoded}</td></tr>
+          <tr><td>Remarks</td><td>{dc.remarks.decoded}</td></tr>
+        </tbody>
+      </table>
+      </Collapsible>
+    );
+  }
+
   render() {
-    if (!this.props.metars) {
+    if (this.props.metars.length === 0) {
       return <div></div>;
     }
 
     return (
       <div className="wxd-metar-list-container">
-        <table>
-          <tbody>
-          <tr>
-            <td width={200}>Airport ID:</td>
-            <td>{ this.props.metars.icao_id }</td>
-          </tr>
-          <tr>
-            <td>Raw METAR:</td>
-            <td>{ this.props.metars.raw_metar }</td>
-          </tr>
-          <tr>
-            <td>Decoded METAR:</td>
-            <td>
-              {this.renderMetarDetails(this.props.metars.decoded_metar)}
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <div className="panel-group">
+          {this.props.metars.map(this.renderMetar)}
+        </div>
       </div>
     );
   }
