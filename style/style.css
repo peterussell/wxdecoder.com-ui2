@@ -58,7 +58,7 @@ input, button {
 }
 
 /* MetarList */
-.metar-list-heading {
+.wxd-page-header {
   font-family: 'Cuprum', sans-serif;
   font-size: 1.6em;
   color: #115e86;

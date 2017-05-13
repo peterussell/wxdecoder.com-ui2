@@ -4,7 +4,7 @@ export default class Contact extends Component {
   render() {
     return (
       <div>
-        Contact!
+        <h1 className="wxd-page-header">Contact Information</h1>
       </div>
     );
   }
