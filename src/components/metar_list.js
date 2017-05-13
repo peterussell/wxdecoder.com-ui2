@@ -99,8 +99,7 @@ class MetarList extends Component {
       return (
         <div>
           <p className="get-started-text">
-            Enter an airport code (eg. KSFO) or raw METAR text above to
-            get started.
+            Enter an airport code (eg. KSFO) above to get started.
           </p>
         </div>
       );
