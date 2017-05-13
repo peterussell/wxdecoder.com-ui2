@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Collapsible from 'react-collapsible';
+import { getOrdinalForDayOfMonth } from '../util';
 
 class MetarList extends Component {
   renderMetarDetails(metar) {
@@ -32,26 +33,61 @@ class MetarList extends Component {
 
   renderMetar(metar) {
     const dc = metar.decoded_metar;
+    const dateTimeText = getOrdinalForDayOfMonth(dc.obs_datetime.decoded.date) +
+      " day of the month at " + dc.obs_datetime.decoded.time + " Zulu";
+    const decodedText = dc.mod_auto.decoded ? "Yes" : "No";
     return (
-      <Collapsible trigger={metar.raw_metar}>
+      <Collapsible
+        trigger={metar.raw_metar}
+        transitionTime="30"
+        triggerClassName="collapsible-heading"
+        triggerOpenedClassName="collapsible-heading"
+        contentInnerClassName="metar-detail-text">
+
       <table>
         <tbody>
-          <tr><td width={200}>Airport ID</td><td>{metar.icao_id}</td></tr>
+          <tr>
+            <td width={200}>Airport ID</td>
+            <td className="detail-val">{metar.icao_id}</td>
+          </tr>
           <tr>
             <td>Date & Time</td>
-            <td>
-              {dc.obs_datetime.decoded.date} day of the month at
-              {dc.obs_datetime.decoded.time} Zulu
+            <td className="detail-val">
+              {dateTimeText}
             </td>
           </tr>
-          <tr><td>Automated</td><td>{dc.mod_auto.decoded}</td></tr>
-          <tr><td>Wind Dir. & Speed</td><td>{dc.wind_dir_speed.decoded}</td></tr>
-          <tr><td>Visibility</td><td>{dc.vis.decoded}</td></tr>
-          <tr><td>Sky Condition</td><td>{dc.sky_condition.decoded}</td></tr>
-          <tr><td>Temperature</td><td>{dc.temp.decoded}</td></tr>
-          <tr><td>Dewpoint</td><td>{dc.dewpoint.decoded}</td></tr>
-          <tr><td>Altimeter</td><td>{dc.altimeter.decoded}</td></tr>
-          <tr><td>Remarks</td><td>{dc.remarks.decoded}</td></tr>
+          <tr>
+            <td>Automated</td>
+            <td className="detail-val">{decodedText}</td>
+          </tr>
+          <tr>
+            <td>Wind Dir. & Speed</td>
+            <td className="detail-val">{dc.wind_dir_speed.decoded}</td>
+          </tr>
+          <tr>
+            <td>Visibility</td>
+            <td className="detail-val">{dc.vis.decoded}</td>
+          </tr>
+          <tr>
+            <td>Sky Condition</td>
+            <td className="detail-val">{dc.sky_condition.decoded.join(', ')}</td>
+          </tr>
+          <tr>
+            <td>Temperature</td>
+            <td className="detail-val">{dc.temp.decoded}</td>
+          </tr>
+          <tr>
+            <td>Dewpoint</td>
+            <td className="detail-val">{dc.dewpoint.decoded}</td>
+          </tr>
+          <tr>
+            <td>Altimeter</td>
+            <td className="detail-val">{dc.altimeter.decoded}</td>
+          </tr>
+          <tr>
+            <td>Remarks</td>
+            <td className="detail-val">{dc.remarks.decoded}</td>
+          </tr>
         </tbody>
       </table>
       </Collapsible>
@@ -60,7 +96,14 @@ class MetarList extends Component {
 
   render() {
     if (this.props.metars.length === 0) {
-      return <div></div>;
+      return (
+        <div>
+          <p className="get-started-text">
+            Enter an airport code (eg. KSFO) or raw METAR text above to
+            get started.
+          </p>
+        </div>
+      );
     }
 
     return (

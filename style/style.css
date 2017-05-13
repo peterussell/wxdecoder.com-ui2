@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Cuprum:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600');
 
 body {
   height: 100%;
@@ -56,8 +58,42 @@ input, button {
 }
 
 /* MetarList */
+.metar-list-heading {
+  font-family: 'Cuprum', sans-serif;
+  font-size: 1.6em;
+  color: #115e86;
+  padding: 20px 0 0 20px;
+}
+.get-started-text {
+  font-family: 'Open Sans', sans-serif;
+  color: #666;
+  padding: 10px 0 0 20px;
+}
 .wxd-metar-list-container {
-  padding-top: 10px;
+  padding: 0px 20px 0 20px;
+}
+.collapsible-heading {
+  font-family: 'Roboto Mono', monospace;
+  color: #666;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  display: block;
+  position: relative;
+  padding: 6px 0 6px 0;
+  margin-top: 10px;
+}
+.metar-detail-text {
+  color: #666;
+  font-family: Verdana, sans-serif;
+  font-size: 0.8em;
+  line-height: 1.8em;
+  margin: 6px 0 0 20px;
+}
+.detail-val {
+  color: #555;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  line-height: 1.8em;
 }
 
 /* PageFooter */

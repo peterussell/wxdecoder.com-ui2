@@ -10,7 +10,7 @@ export default function(state = [], action) {
         raw_metar: decoded.raw_metar,
         decoded_metar: decoded
       }
-      return [...state, newMetar];
+      return [newMetar, ...state];
 
     default:
       return state;

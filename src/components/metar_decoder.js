@@ -8,6 +8,8 @@ export default class MetarDecoder extends Component {
     return (
       <div>
         <SearchBar />
+        
+        <h1 className="metar-list-heading">Decoded METARs</h1>
         <MetarList />
       </div>
     );
