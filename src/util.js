@@ -1,11 +1,11 @@
 export function getOrdinalForDayOfMonth(d) {
-  let ordinal = '';
-  if(d>3 && d<21) ordinal = 'th';
+  if(d>3 && d<21)
+    return d + 'th';
+
   switch (d % 10) {
-        case 1:  ordinal = 'st';
-        case 2:  ordinal = 'nd';
-        case 3:  ordinal = 'rd';
-        default: ordinal = 'th';
+    case 1:   return d + 'st';
+    case 2:   return d + 'nd';
+    case 3:   return d + 'rd';
+    default:  return d + 'th';
   }
-  return d + ordinal;
 }

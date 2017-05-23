@@ -35,11 +35,11 @@ class MetarList extends Component {
     const dc = metar.decoded_metar;
     const dateTimeText = getOrdinalForDayOfMonth(dc.obs_datetime.decoded.date) +
       " day of the month at " + dc.obs_datetime.decoded.time + " Zulu";
-    const decodedText = dc.mod_auto.decoded ? "Yes" : "No";
+    const modAutoText = dc.mod_auto.decoded ? "Yes" : "No";
     return (
       <Collapsible
         trigger={metar.raw_metar}
-        transitionTime="30"
+        transitionTime={30}
         triggerClassName="collapsible-heading"
         triggerOpenedClassName="collapsible-heading"
         contentInnerClassName="metar-detail-text">
@@ -58,7 +58,7 @@ class MetarList extends Component {
           </tr>
           <tr>
             <td>Automated</td>
-            <td className="detail-val">{decodedText}</td>
+            <td className="detail-val">{modAutoText}</td>
           </tr>
           <tr>
             <td>Wind Dir. & Speed</td>
@@ -85,8 +85,12 @@ class MetarList extends Component {
             <td className="detail-val">{dc.altimeter.decoded}</td>
           </tr>
           <tr>
-            <td>Remarks</td>
-            <td className="detail-val">{dc.remarks.decoded}</td>
+            <td className="align-top">Remarks</td>
+            <td className="detail-val detail-val-remarks">
+              {dc.stn_type.decoded}<br />
+              {dc.sea_level_pressure.decoded}<br />
+              {dc.remarks.decoded}<br />
+            </td>
           </tr>
         </tbody>
       </table>

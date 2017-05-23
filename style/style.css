@@ -95,6 +95,10 @@ input, button {
   font-weight: 600;
   line-height: 1.8em;
 }
+.detail-val-remarks {
+  line-height: 1.4em;
+  padding-top: 0.4em;
+}
 
 /* PageFooter */
 .wxd-footer {
