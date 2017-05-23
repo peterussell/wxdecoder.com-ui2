@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 export default class Contact extends Component {
+  componentDidMount() {
+    document.title = "Contact | WX Decoder"
+  }
   render() {
     return (
       <div>

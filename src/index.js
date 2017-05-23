@@ -13,6 +13,8 @@ import Login from './components/login';
 
 import reducers from './reducers';
 
+import '../assets/favicons/favicons';
+
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(

@@ -12,6 +12,11 @@ export default class MetarDecoder extends Component {
     ReactGA.initialize('UA-98122822-1');
     ReactGA.pageview(window.location.pathname);
   }
+
+  componentDidMount() {
+    document.title = "WX Decoder"
+  }
+
   render() {
     return (
       <div>
