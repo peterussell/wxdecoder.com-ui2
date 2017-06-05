@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Collapsible from 'react-collapsible';
+import ReactTooltip from 'react-tooltip';
+import FontAwesome from 'react-fontawesome';
 import { getOrdinalForDayOfMonth } from '../util';
 
 class MetarList extends Component {
@@ -36,65 +38,102 @@ class MetarList extends Component {
     const dateTimeText = getOrdinalForDayOfMonth(dc.obs_datetime.decoded.date) +
       " day of the month at " + dc.obs_datetime.decoded.time + " Zulu";
     const modAutoText = dc.mod_auto.decoded ? "Yes" : "No";
-    return (
-      <Collapsible
-        trigger={metar.raw_metar}
-        transitionTime={30}
-        triggerClassName="collapsible-heading"
-        triggerOpenedClassName="collapsible-heading"
-        contentInnerClassName="metar-detail-text">
 
-      <table>
-        <tbody>
-          <tr>
-            <td width={200}>Airport ID</td>
-            <td className="detail-val">{metar.icao_id}</td>
-          </tr>
-          <tr>
-            <td>Date & Time</td>
-            <td className="detail-val">
-              {dateTimeText}
-            </td>
-          </tr>
-          <tr>
-            <td>Automated</td>
-            <td className="detail-val">{modAutoText}</td>
-          </tr>
-          <tr>
-            <td>Wind Dir. & Speed</td>
-            <td className="detail-val">{dc.wind_dir_speed.decoded}</td>
-          </tr>
-          <tr>
-            <td>Visibility</td>
-            <td className="detail-val">{dc.vis.decoded}</td>
-          </tr>
-          <tr>
-            <td>Sky Condition</td>
-            <td className="detail-val">{dc.sky_condition.decoded.join(', ')}</td>
-          </tr>
-          <tr>
-            <td>Temperature</td>
-            <td className="detail-val">{dc.temp.decoded}</td>
-          </tr>
-          <tr>
-            <td>Dewpoint</td>
-            <td className="detail-val">{dc.dewpoint.decoded}</td>
-          </tr>
-          <tr>
-            <td>Altimeter</td>
-            <td className="detail-val">{dc.altimeter.decoded}</td>
-          </tr>
-          <tr>
-            <td className="align-top">Remarks</td>
-            <td className="detail-val detail-val-remarks">
-              {dc.stn_type.decoded}<br />
-              {dc.sea_level_pressure.decoded}<br />
-              {dc.remarks.decoded}<br />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      </Collapsible>
+    // TEMPORARY: we need a renderer for each table row, which will clean
+    //            up this repeated code.
+    const icaoIdDesc = "<b>Airport ID (" + dc.icao_id.orig + ")</b><br />" +
+                       dc.icao_id.description.general;
+    const dateTimeDesc = "<b>Date & Time (" + dc.obs_datetime.orig + ")</b><br />" +
+                         dc.obs_datetime.description.general;
+    const autoOrigText = dc.mod_auto.orig ? "AUTO" : "not present";
+    const modAutoDesc = "<b>Automated (" + autoOrigText + ")</b><br />" +
+                        dc.mod_auto.description.general;
+
+    return (
+      <div>
+        <ReactTooltip className="detail-tooltip"/>
+        <Collapsible
+          trigger={metar.raw_metar}
+          transitionTime={30}
+          triggerClassName="collapsible-heading"
+          triggerOpenedClassName="collapsible-heading"
+          contentInnerClassName="metar-detail-text">
+
+        <table>
+          <tbody>
+            <tr>
+              <td width={200}>
+                Airport ID
+                <FontAwesome name="info-circle"
+                             data-tip={icaoIdDesc}
+                             data-type="info"
+                             data-html="true"
+                             className="detail-info-icon" />
+
+              </td>
+              <td className="detail-val">{metar.icao_id}</td>
+            </tr>
+            <tr>
+              <td>
+                Date & Time
+                <FontAwesome name="info-circle"
+                             data-tip={dateTimeDesc}
+                             data-type="info"
+                             data-html="true"
+                             className="detail-info-icon" />
+
+              </td>
+              <td className="detail-val">
+                {dateTimeText}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Automated
+                <FontAwesome name="info-circle"
+                             data-tip={modAutoDesc}
+                             data-type="info"
+                             data-html="true"
+                             className="detail-info-icon" />
+              </td>
+              <td className="detail-val">{modAutoText}</td>
+            </tr>
+            <tr>
+              <td>Wind Dir. & Speed</td>
+              <td className="detail-val">{dc.wind_dir_speed.decoded}</td>
+            </tr>
+            <tr>
+              <td>Visibility</td>
+              <td className="detail-val">{dc.vis.decoded}</td>
+            </tr>
+            <tr>
+              <td>Sky Condition</td>
+              <td className="detail-val">{dc.sky_condition.decoded.join(', ')}</td>
+            </tr>
+            <tr>
+              <td>Temperature</td>
+              <td className="detail-val">{dc.temp.decoded}</td>
+            </tr>
+            <tr>
+              <td>Dewpoint</td>
+              <td className="detail-val">{dc.dewpoint.decoded}</td>
+            </tr>
+            <tr>
+              <td>Altimeter</td>
+              <td className="detail-val">{dc.altimeter.decoded}</td>
+            </tr>
+            <tr>
+              <td className="align-top">Remarks</td>
+              <td className="detail-val detail-val-remarks">
+                {dc.stn_type.decoded}<br />
+                {dc.sea_level_pressure.decoded}<br />
+                {dc.remarks.decoded}<br />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </Collapsible>
+      </div>
     );
   }
 
