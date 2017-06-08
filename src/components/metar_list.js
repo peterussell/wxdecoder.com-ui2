@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Collapsible from 'react-collapsible';
 import ReactTooltip from 'react-tooltip';
 import FontAwesome from 'react-fontawesome';
-import { getOrdinalForDayOfMonth } from '../util';
+import { getOrdinalForDayOfMonth, capitalize } from '../util';
 
 class MetarList extends Component {
   renderMetarDetails(metar) {
@@ -107,6 +107,10 @@ class MetarList extends Component {
               <td className="detail-val">{dc.vis.decoded}</td>
             </tr>
             <tr>
+              <td>Weather Phenomena</td>
+              <td className="detail-val">{dc.wx_phenomena.decoded.join(', ')}</td>
+            </tr>
+            <tr>
               <td>Sky Condition</td>
               <td className="detail-val">{dc.sky_condition.decoded.join(', ')}</td>
             </tr>
@@ -126,8 +130,9 @@ class MetarList extends Component {
               <td className="align-top">Remarks</td>
               <td className="detail-val detail-val-remarks">
                 {dc.stn_type.decoded}<br />
-                {dc.sea_level_pressure.decoded}<br />
-                {dc.remarks.decoded}<br />
+                {capitalize(dc.sea_level_pressure.decoded)}<br />
+                {capitalize(dc.hourly_temp_dewpoint.decoded)}<br />
+                {capitalize(dc.remarks.decoded)}<br />
               </td>
             </tr>
           </tbody>

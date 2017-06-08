@@ -9,3 +9,7 @@ export function getOrdinalForDayOfMonth(d) {
     default:  return d + 'th';
   }
 }
+
+export function capitalize(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
