@@ -90,6 +90,7 @@ input, button {
 .collapsible-heading:hover {
   cursor: pointer;
 }
+
 .metar-detail-text {
   color: #666;
   font-family: Verdana, sans-serif;
@@ -124,6 +125,12 @@ a:link .detail-tooltip {
   font-size: 1.1em !important;
 }
 
+/* Contact Page */
+.contact-text {
+  color: #666;
+  font-family: 'Open Sans', sans-serif;
+  padding: 20px 0 0 30px;
+}
 /* PageFooter */
 .wxd-footer {
   height: 80px;
