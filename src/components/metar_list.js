@@ -48,6 +48,8 @@ class MetarList extends Component {
     const autoOrigText = dc.mod_auto.orig ? "AUTO" : "not present";
     const modAutoDesc = "<b>Automated (" + autoOrigText + ")</b><br />" +
                         dc.mod_auto.description.general;
+    const windDirSpeedDesc = "<b>Wind Dir. & Speed (" + dc.wind_dir_speed.orig + ")</b><br />" +
+                             dc.wind_dir_speed.description.general;
 
     return (
       <div key={dc.icao_id.orig + dc.obs_datetime.orig}>
@@ -99,7 +101,14 @@ class MetarList extends Component {
               <td className="detail-val">{modAutoText}</td>
             </tr>
             <tr>
-              <td>Wind Dir. & Speed</td>
+              <td>
+                Wind Dir. & Speed
+                <FontAwesome name="info-circle"
+                             data-tip={windDirSpeedDesc}
+                             data-type="info"
+                             data-html="true"
+                             className="detail-info-icon" />
+              </td>
               <td className="detail-val">{dc.wind_dir_speed.decoded}</td>
             </tr>
             <tr>
