@@ -26,8 +26,9 @@ class SearchBar extends Component {
   }
 
   onSubmit(values) {
+    const { reset } = this.props;
     this.props.fetchMetar(values);
-    //console.log(values);
+    reset();
   }
 
   render() {
@@ -35,7 +36,8 @@ class SearchBar extends Component {
 
     return (
       <div className="form-container wxd-search-bar-container">
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <form autoComplete="off"
+              onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field name="metarInput" component={this.renderInputField} />
         </form>
       </div>
@@ -45,9 +47,11 @@ class SearchBar extends Component {
 
 function validate(values) {
   const errors = {};
-  if (!values.metarInput) {
-    errors.metarInput = "Enter a METAR";
-  }
+  // Example of validation (but the empty field thing is just
+  // kind of annoying).
+  // if (!values.metarInput) {
+  //   errors.metarInput = "Enter a METAR";
+  // }
   return errors;
 }
 
