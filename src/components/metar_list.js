@@ -50,7 +50,7 @@ class MetarList extends Component {
                         dc.mod_auto.description.general;
 
     return (
-      <div>
+      <div key={dc.icao_id.orig + dc.obs_datetime.orig}>
         <ReactTooltip className="detail-tooltip"/>
         <Collapsible
           trigger={metar.raw_metar}
