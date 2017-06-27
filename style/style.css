@@ -90,17 +90,16 @@ input, button {
 .collapsible-heading:hover {
   cursor: pointer;
 }
-.Collapsible__trigger:after {
+.Collapsible__trigger:before {
   font-family: 'FontAwesome';
   content: '\f107';
-  position: absolute;
-  right: 10px;
-  top: 6px;
-  display: block;
-  transition: transform 100ms;
+  transition: transform 200ms;
+  float: left;
+  margin: 0 10px 0 10px;
+  transform: rotateZ(-90deg);
 }
-.Collapsible__trigger.is-open:after {
-  transform: rotateZ(180deg);
+.Collapsible__trigger.is-open:before {
+  transform: rotateZ(0deg);
 }
 
 .metar-detail-text {
