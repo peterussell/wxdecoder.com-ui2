@@ -51,6 +51,18 @@ class MetarList extends Component {
     const windDirSpeedDesc = "<b>Wind Dir. & Speed (" + dc.wind_dir_speed.orig + ")</b><br />" +
                              dc.wind_dir_speed.description.general;
 
+    const stnType = dc.stn_type.decoded ?
+      <div>{capitalize(dc.stn_type.decoded)}</div> : "";
+
+    const slp = dc.sea_level_pressure.decoded ?
+      <div>{capitalize(dc.sea_level_pressure.decoded)}</div> : "";
+
+    const hourlyTempDewpoint = dc.hourly_temp_dewpoint.decoded ?
+      <div>{capitalize(dc.hourly_temp_dewpoint.decoded)}</div> : "";
+
+    const remarks = dc.remarks.decoded ?
+      <div>{dc.remarks.decoded}</div> : "";
+
     return (
       <div key={dc.icao_id.orig + dc.obs_datetime.orig}>
         <ReactTooltip className="detail-tooltip"/>
@@ -138,10 +150,10 @@ class MetarList extends Component {
             <tr>
               <td className="align-top">Remarks</td>
               <td className="detail-val detail-val-remarks">
-                {dc.stn_type.decoded}<br />
-                {capitalize(dc.sea_level_pressure.decoded)}<br />
-                {capitalize(dc.hourly_temp_dewpoint.decoded)}<br />
-                {capitalize(dc.remarks.decoded)}<br />
+                {stnType}
+                {slp}
+                {hourlyTempDewpoint}
+                {remarks}
               </td>
             </tr>
           </tbody>
